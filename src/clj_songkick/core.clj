@@ -9,8 +9,7 @@
 (def venue-search-url "http://api.songkick.com/api/3.0/search/venues.json?apikey=") ;; "query="
 (def event-search-url "http://api.songkick.com/api/3.0/events.json?apikey=") ;; params
 (def artist-search-url "http://api.songkick.com/api/3.0/search/artists.json?apikey=") ;; "query="
-(def city-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=") ;; "query="
-(def latlong-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=") ;; "location=geo:{lat,lng}"
+(def location-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=") ;; "location=geo:{lat,lng}"
 
 ;;;;;;
 ;; Helpers
@@ -43,5 +42,17 @@
   [api-key venue]
   (let [query (plusify venue)
         url (str venue-search-url api-key "&query=" query)]
+    (->> (client/get url) :body json/read-json)))
+
+(defn location-search
+  "Search for locations by client IP address, a particular IP address, query (eg 'Austin TX'), or
+   geographic coordinates (latitude, longitude)"
+  [api-key kind & query]
+  (let [query (case kind
+                :clientip "&location=clientip"
+                :city (str "&query=" (plusify (first query)))
+                :ip (str "&location=ip:" (first query))
+                :geo (str "&location=geo:" (:lat query) (:long query)))
+        url (str location-search-url api-key query)]
     (->> (client/get url) :body json/read-json)))
 
