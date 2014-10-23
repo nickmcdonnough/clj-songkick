@@ -6,10 +6,24 @@
 ;;;;;;
 ;; URLs
 ;;;;;;
-(def venue-search-url "http://api.songkick.com/api/3.0/search/venues.json?apikey=") ;; "query="
-(def event-search-url "http://api.songkick.com/api/3.0/events.json?apikey=") ;; params
-(def artist-search-url "http://api.songkick.com/api/3.0/search/artists.json?apikey=") ;; "query="
-(def location-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=") ;; "location=geo:{lat,lng}"
+
+;; Search URLs
+(def venue-search-url "http://api.songkick.com/api/3.0/search/venues.json?apikey=")
+(def event-search-url "http://api.songkick.com/api/3.0/events.json?apikey=")
+(def artist-search-url "http://api.songkick.com/api/3.0/search/artists.json?apikey=")
+(def location-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=")
+
+;; Calendar URLs
+(def venue-calendar-url "http://api.songkick.com/api/3.0/venues/{venue_id}/calendar.json?apikey=")
+(def artist-calendar-url "http://api.songkick.com/api/3.0/artists/{artist_id}/calendar.json?apikey=")
+(defn location-calendar-url
+  [location-id]
+  (str "http://api.songkick.com/api/3.0/metro_areas/" location-id "/calendar.json?apikey="))
+(defn user-calendar-url
+  [username]
+  (str "http://api.songkick.com/api/3.0/users/" username "/calendar.json?reason=tracked_artist&apikey="))
+
+
 
 ;;;;;;
 ;; Helpers
