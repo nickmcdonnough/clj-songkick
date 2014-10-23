@@ -32,6 +32,7 @@
 ;;;;;;
 
 (defn artist-search
+  "The function take an API key and an artist name eg: 'Richie Hawtin' and returns the full API response."
   [api-key artist]
   (let [query (plusify artist)
         url (str artist-search-url api-key "&query=" query)]
