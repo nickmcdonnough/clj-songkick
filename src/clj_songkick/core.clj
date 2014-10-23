@@ -84,6 +84,15 @@
 ;;;;;;
 
 (defn get-artist-events
+  "Requests all upcoming events for artist represented by artist-id. This ID comes from Songkick."
   [api-key artist-id]
   (let [url (str (artist-calendar-url artist-id) api-key)]
     (->> (client/get url) :body json/read-json)))
+
+(defn get-venue-events
+  "Requests all upcoming events for venue represented by venue-id. This ID comes from Songkick."
+  [api-key venue-id]
+  (let [url (str (venue-calendar-url venue-id) api-key)]
+    (->> (client/get url) :body json/read-json)))
+
+
