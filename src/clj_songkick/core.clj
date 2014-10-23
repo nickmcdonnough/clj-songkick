@@ -77,3 +77,13 @@
         url (str location-search-url api-key query)]
     (->> (client/get url) :body json/read-json)))
 
+
+
+;;;;;;
+;; Calendar Requests
+;;;;;;
+
+(defn get-artist-events
+  [api-key artist-id]
+  (let [url (str (artist-calendar-url artist-id) api-key)]
+    (->> (client/get url) :body json/read-json)))
