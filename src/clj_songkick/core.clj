@@ -26,3 +26,14 @@
         pairs (interleave params values)]
     (string/join "&" (map #(string/join "=" %) (partition 2 pairs)))))
 
+
+;;;;;;
+;; Searching
+;;;;;;
+
+(defn artist-search
+  [api-key artist]
+  (let [query (plusify artist)
+        url (str artist-search-url api-key "&query=" query)]
+    (->> (client/get url) :body json/read-json)))
+
