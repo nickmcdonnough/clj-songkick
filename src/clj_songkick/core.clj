@@ -14,11 +14,18 @@
 (def location-search-url "http://api.songkick.com/api/3.0/search/locations.json?apikey=")
 
 ;; Calendar URLs
-(def venue-calendar-url "http://api.songkick.com/api/3.0/venues/{venue_id}/calendar.json?apikey=")
-(def artist-calendar-url "http://api.songkick.com/api/3.0/artists/{artist_id}/calendar.json?apikey=")
+(defn venue-calendar-url
+  [venue-id]
+  (str "http://api.songkick.com/api/3.0/venues/" venue-id "/calendar.json?apikey="))
+
+(defn artist-calendar-url
+  [artist-id]
+  (str "http://api.songkick.com/api/3.0/artists/" artist-id "/calendar.json?apikey="))
+
 (defn location-calendar-url
   [location-id]
   (str "http://api.songkick.com/api/3.0/metro_areas/" location-id "/calendar.json?apikey="))
+
 (defn user-calendar-url
   [username]
   (str "http://api.songkick.com/api/3.0/users/" username "/calendar.json?reason=tracked_artist&apikey="))
