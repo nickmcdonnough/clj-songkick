@@ -37,3 +37,10 @@
         url (str artist-search-url api-key "&query=" query)]
     (->> (client/get url) :body json/read-json)))
 
+(defn venue-search
+  "The function take an API key and a venue eg: 'Fabrik London' and returns the full API response."
+  [api-key venue]
+  (let [query (plusify venue)
+        url (str venue-search-url api-key "&query=" query)]
+    (->> (client/get url) :body json/read-json)))
+
